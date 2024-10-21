@@ -1,0 +1,68 @@
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Capital Final</title>
+ 
+   
+        <link rel="stylesheet" href= "style.css"> <!--C:\VSCODE\WEB_MF\style.css -->
+   
+</head>
+
+<body>
+    <div class = "background">
+        <div class = "top_background">
+            
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "header">
+            <h1>Calculadora de Capital Final</h1>
+    </div>
+
+    <div class = "input-section"> 
+            <label for="capitalInicial">Capital Inicial (€):</label>
+            <input type="number" id="capitalInicial" required>
+            <br>
+            <label for="tasaInteres">Tasa de Interés (%):</label>
+            <input type="number" id="tasaInteres" required>
+            <br>
+            <label for="periodos">Número de Periodos:</label>
+            <input type="number" id="periodos" required>
+            <br>
+            <label for="tiempo">Tiempo (años):</label>
+            <input type="number" id="tiempo" required>
+            <br>
+    </div>
+
+            <div class = "button-section">
+            <button onclick="calcularCapitalFinal()">Calcular</button>
+            </div>
+            <div id="resultado"></div>
+</body>
+
+    <script>
+        function calcularCapitalFinal() {
+            // Obtén los valores ingresados por el usuario
+            let CI = parseFloat(document.getElementById("capitalInicial").value);
+            let i = parseFloat(document.getElementById("tasaInteres").value) / 100; // Convertir a decimal
+            let n = parseInt(document.getElementById("periodos").value);
+            let t = parseInt(document.getElementById("tiempo").value);
+
+            // Validar los valores ingresados
+            if (isNaN(CI) || isNaN(i) || isNaN(n) || isNaN(t) || CI <= 0 || n <= 0 || t <= 0) {
+                document.getElementById("resultado").textContent = "Por favor, introduce valores válidos.";
+                return;
+            }
+
+            // Fórmula para calcular el capital final (CF = CI * (1 + i/n)^(nt))
+            let CF = CI * Math.pow(1 + i / n, n * t);
+
+            // Muestra el resultado
+            document.getElementById("resultado").textContent = "Capital Final: " + CF.toFixed(2) + " €";
+        }
+    </script>
+
+</html>
+
